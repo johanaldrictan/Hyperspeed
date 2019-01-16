@@ -18,13 +18,13 @@ public class DestroyByBoundary : MonoBehaviour {
             Debug.Log("Cannot find 'GameController' script");
         }
     }
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         Debug.Log("Trigger exit");
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             gameController.GameOver();
         }
-        Destroy(other.gameObject);
+        Destroy(collision.gameObject);
     }
 }
