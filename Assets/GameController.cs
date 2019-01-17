@@ -5,8 +5,10 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public GameObject playerPrefab;
+    public float platformSpeed;
 
     private bool gameOver = false;
+
 
 	// Use this for initialization
 	void Start () {

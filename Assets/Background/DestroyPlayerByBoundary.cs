@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyByBoundary : MonoBehaviour {
+public class DestroyPlayerByBoundary : MonoBehaviour {
 
     private GameController gameController;
 
@@ -20,9 +20,10 @@ public class DestroyByBoundary : MonoBehaviour {
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
+            gameController.GameOver();
             Destroy(collision.gameObject);
-        }
+        }     
     }
 }

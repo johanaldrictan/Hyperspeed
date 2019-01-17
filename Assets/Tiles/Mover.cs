@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyByBoundary : MonoBehaviour {
+public class Mover : MonoBehaviour {
 
+    private Rigidbody2D rb;
     private GameController gameController;
 
+    // Use this for initialization
     void Start()
     {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
@@ -17,12 +19,11 @@ public class DestroyByBoundary : MonoBehaviour {
         {
             Debug.Log("Cannot find 'GameController' script");
         }
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = -transform.right * gameController.platformSpeed;
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void Update()
     {
-        if (!collision.CompareTag("Player"))
-        {
-            Destroy(collision.gameObject);
-        }
+        rb.velocity = -transform.right * gameController.platformSpeed;
     }
 }
