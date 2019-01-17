@@ -10,10 +10,10 @@ public class Mover : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
-        if (gameControllerObject != null)
+        GameObject levelControllerObject = GameObject.FindWithTag("LevelController");
+        if (levelControllerObject != null)
         {
-            levelController = gameControllerObject.GetComponent<LevelController>();
+            levelController = levelControllerObject.GetComponent<LevelController>();
         }
         if (levelController == null)
         {
