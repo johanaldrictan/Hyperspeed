@@ -2,35 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles functionality necessary to running the game itself. (ie; escape menu, continue/quit after loss)
+/// </summary>
 public class GameController : MonoBehaviour {
-
-    public GameObject playerPrefab;
-    public float platformSpeed;
-
-    private bool gameOver = false;
-
 
 	// Use this for initialization
 	void Start () {
-        SpawnPlayer();
+		
 	}
 	
+	// Update is called once per frame
 	void Update () {
-        if (gameOver)
-        {
-            Debug.Log("Lose");
-        }
+		
 	}
-
-    void SpawnPlayer()
-    {
-        Instantiate(playerPrefab);
-    }
-
-    public void GameOver()
-    {
-        gameOver = true;
-    }
-
-
 }

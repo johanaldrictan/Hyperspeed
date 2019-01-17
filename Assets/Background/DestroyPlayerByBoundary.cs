@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class DestroyPlayerByBoundary : MonoBehaviour {
 
-    private GameController gameController;
+    private LevelController levelController;
 
     void Start()
     {
-        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
-        if (gameControllerObject != null)
+        GameObject levelControllerObject = GameObject.FindWithTag("LevelController");
+        if (levelControllerObject != null)
         {
-            gameController = gameControllerObject.GetComponent<GameController>();
+            levelController = levelControllerObject.GetComponent<LevelController>();
         }
-        if (gameController == null)
+        if (levelController == null)
         {
-            Debug.Log("Cannot find 'GameController' script");
+            Debug.Log("Cannot find 'LevelController' script");
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            gameController.GameOver();
+            levelController.GameOver();
             Destroy(collision.gameObject);
         }     
     }

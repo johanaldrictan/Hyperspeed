@@ -5,7 +5,7 @@ using UnityEngine;
 public class Mover : MonoBehaviour {
 
     private Rigidbody2D rb;
-    private GameController gameController;
+    private LevelController levelController;
 
     // Use this for initialization
     void Start()
@@ -13,17 +13,17 @@ public class Mover : MonoBehaviour {
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
         if (gameControllerObject != null)
         {
-            gameController = gameControllerObject.GetComponent<GameController>();
+            levelController = gameControllerObject.GetComponent<LevelController>();
         }
-        if (gameController == null)
+        if (levelController == null)
         {
-            Debug.Log("Cannot find 'GameController' script");
+            Debug.Log("Cannot find 'LevelController' script");
         }
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = -transform.right * gameController.platformSpeed;
+        rb.velocity = -transform.right * levelController.platformSpeed;
     }
     private void Update()
     {
-        rb.velocity = -transform.right * gameController.platformSpeed;
+        rb.velocity = -transform.right * levelController.platformSpeed;
     }
 }
