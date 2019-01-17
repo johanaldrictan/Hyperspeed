@@ -36,4 +36,19 @@ public class PlayerMover : MonoBehaviour
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
 
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Ground")
+        {
+            isTouchingGround = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Ground")
+        {
+            isTouchingGround = false;
+        }
+    }
 }
