@@ -7,14 +7,20 @@ using UnityEngine;
 /// </summary>
 public class LevelController : MonoBehaviour {
 
+    private bool gameOver = false;
+
     public GameObject playerPrefab;
     public float platformSpeed;
 
-    private bool gameOver = false;
+    //Level generation
+    public Grid grid;
+    public GameObject[] platforms;
 
 
 	// Use this for initialization
 	void Start () {
+        SpawnTilemap();
+        StartCoroutine(SpawnTilemapWithInterval());
         SpawnPlayer();
 	}
 	
@@ -22,6 +28,10 @@ public class LevelController : MonoBehaviour {
         if (gameOver)
         {
             Debug.Log("Lose");
+        }
+        else
+        {
+            Debug.Log(Time.timeSinceLevelLoad);
         }
 	}
 
@@ -33,6 +43,23 @@ public class LevelController : MonoBehaviour {
     public void GameOver()
     {
         gameOver = true;
+    }
+
+    IEnumerator SpawnTilemapWithInterval()
+    {
+        while (!gameOver)
+        {
+            //wait till current level has passed to generate new level elements
+            yield return new WaitForSeconds((float)(17.8 / platformSpeed));
+            SpawnTilemap();
+        }
+    }
+    /// <summary>
+    /// Spawns tilemap offscreen
+    /// </summary>
+    void SpawnTilemap()
+    {
+        Instantiate(platforms[0], grid.CellToWorld(new Vector3Int(18, -1, 0)), Quaternion.identity);
     }
 
 
