@@ -10,15 +10,34 @@ public class LevelController : MonoBehaviour {
     private bool gameOver = false;
 
     public GameObject playerPrefab;
+    public float startingPlatformSpeed;
+    public float maxPlatformSpeed;
+    public float scoreInterval;
+    public float scoreGoal;
+
     public float platformSpeed;
 
     //Level generation
     public Grid grid;
     public GameObject[] platforms;
 
+    private int levelScore;
+    private float timer;
+    private UIController uIController;
 
 	// Use this for initialization
 	void Start () {
+        GameObject UIControllerObject = GameObject.FindWithTag("UIController");
+        if (UIControllerObject != null)
+        {
+            uIController = UIControllerObject.GetComponent<UIController>();
+        }
+        if (uIController == null)
+        {
+            Debug.Log("Cannot find 'UIController' script");
+        }
+        levelScore = 0;
+        uIController.UpdateScore(levelScore);
         SpawnTilemap();
         StartCoroutine(SpawnTilemapWithInterval());
         SpawnPlayer();
@@ -31,7 +50,15 @@ public class LevelController : MonoBehaviour {
         }
         else
         {
-            Debug.Log(Time.timeSinceLevelLoad);
+            timer += Time.deltaTime;
+
+            if (timer > scoreInterval)
+            {
+                levelScore ++;
+                uIController.UpdateScore(levelScore);
+                //Reset the timer to 0.
+                timer = 0;
+            }
         }
 	}
 
@@ -61,6 +88,5 @@ public class LevelController : MonoBehaviour {
     {
         Instantiate(platforms[0], grid.CellToWorld(new Vector3Int(18, -1, 0)), Quaternion.identity);
     }
-
 
 }
