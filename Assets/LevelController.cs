@@ -10,10 +10,12 @@ public class LevelController : MonoBehaviour {
     private bool gameOver = false;
 
     public GameObject playerPrefab;
-    public float startingPlatformSpeed;
+    public float minPlatformSpeed;
     public float maxPlatformSpeed;
     public float scoreInterval;
-    public float scoreGoal;
+    public int scoreGoal;
+
+    public float scoreThreshold;
 
     public float platformSpeed;
 
@@ -21,9 +23,13 @@ public class LevelController : MonoBehaviour {
     public Grid grid;
     public GameObject[] platforms;
 
+    public ParticleSystem distantStars;
+    public ParticleSystem stars;
+
     private int levelScore;
     private float timer;
     private UIController uIController;
+    private bool updateParticleSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -37,7 +43,8 @@ public class LevelController : MonoBehaviour {
             Debug.Log("Cannot find 'UIController' script");
         }
         levelScore = 0;
-        uIController.UpdateScore(levelScore);
+        uIController.SetGoal(scoreGoal);
+        OnScoreChanged();
         SpawnTilemap();
         StartCoroutine(SpawnTilemapWithInterval());
         SpawnPlayer();
@@ -47,6 +54,11 @@ public class LevelController : MonoBehaviour {
         if (gameOver)
         {
             Debug.Log("Lose");
+            uIController.ShowGameOverScreen();
+        }
+        else if(levelScore == scoreGoal)
+        {
+
         }
         else
         {
@@ -55,12 +67,17 @@ public class LevelController : MonoBehaviour {
             if (timer > scoreInterval)
             {
                 levelScore ++;
-                uIController.UpdateScore(levelScore);
+                OnScoreChanged();
                 //Reset the timer to 0.
                 timer = 0;
             }
         }
 	}
+    private void LateUpdate()
+    {
+        //fix particles here
+        ChangeParticleSpeed();
+    }
 
     void SpawnPlayer()
     {
@@ -87,6 +104,34 @@ public class LevelController : MonoBehaviour {
     void SpawnTilemap()
     {
         Instantiate(platforms[0], grid.CellToWorld(new Vector3Int(18, -1, 0)), Quaternion.identity);
+    }
+
+    void ChangeSpeed()
+    {
+        platformSpeed = minPlatformSpeed + (Mathf.Clamp01(levelScore / scoreThreshold) * (maxPlatformSpeed - minPlatformSpeed));
+        updateParticleSpeed = true;
+    }
+
+    void ChangeParticleSpeed()
+    {
+        if (updateParticleSpeed)
+        {
+            updateParticleSpeed = false;
+            UpdateParticles(distantStars);
+            UpdateParticles(stars);
+        }
+    }
+
+    void UpdateParticles(ParticleSystem particleSystem)
+    {
+        ParticleSystem.MainModule psmain = particleSystem.main;
+        psmain.simulationSpeed = (float)(platformSpeed);
+    }
+
+    void OnScoreChanged()
+    {
+        uIController.UpdateScore(levelScore);
+        ChangeSpeed();
     }
 
 }

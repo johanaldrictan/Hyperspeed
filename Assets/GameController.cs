@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handles functionality necessary to running the game itself. (ie; escape menu, continue/quit after loss)
@@ -16,4 +17,14 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void LoadLevel()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void QuitGame()
+    {
+        Debug.Log("Quitting");
+        Application.Quit();
+    }
 }
