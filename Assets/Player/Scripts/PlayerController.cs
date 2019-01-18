@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
     public float jumpForce;
+    public float fastFallSpeed;
 
     // Use this for initialization
     void Start()
@@ -36,6 +37,15 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 wantsToJump = false;
+            }
+        }
+        else
+        {
+            //mid air
+            //fastfall code
+            if(Input.GetAxisRaw("Vertical") < 0f)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -fastFallSpeed);
             }
         }
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
