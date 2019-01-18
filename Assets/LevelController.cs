@@ -30,6 +30,7 @@ public class LevelController : MonoBehaviour {
     private float timer;
     private UIController uIController;
     private bool updateParticleSpeed;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -51,6 +52,7 @@ public class LevelController : MonoBehaviour {
 	}
 	
 	void Update () {
+        
         if (gameOver)
         {
             Debug.Log("Lose");
@@ -58,7 +60,8 @@ public class LevelController : MonoBehaviour {
         }
         else if(levelScore == scoreGoal)
         {
-
+            Debug.Log("Win");
+            uIController.ShowWinScreen();
         }
         else
         {
@@ -103,6 +106,20 @@ public class LevelController : MonoBehaviour {
     /// </summary>
     void SpawnTilemap()
     {
+        //todo: Implement proper random tilemap generation
+        //Pick random platform 
+        //determine spacing by looking at the transfom.localscale.x
+        //determine additional spacing by random function with a clamp
+        //determine height by perlin noise 
+        //loop
+
+        //smooth heights
+
+        //spawn obstacles
+
+        //spawn coins
+
+
         Instantiate(platforms[0], grid.CellToWorld(new Vector3Int(18, -1, 0)), Quaternion.identity);
     }
 

@@ -9,12 +9,20 @@ public class UIController : MonoBehaviour {
     public Text goalText;
     public GameObject InGameCanvas;
     public GameObject GameOverCanvas;
+    public GameObject WinScreenCanvas;
+    public GameObject EscapeMenuCanvas;
+
+    public bool inEscapeMenu;
 
     private void Start()
     {
+        inEscapeMenu = false;
         GameOverCanvas.GetComponent<CanvasGroup>().interactable = false;
+        WinScreenCanvas.GetComponent<CanvasGroup>().interactable = false;
+        EscapeMenuCanvas.GetComponent<CanvasGroup>().interactable = false;
+
     }
-    
+
     public void SetGoal(int goalScore)
     {
         goalText.text = "Score to Hyperspeed: " + goalScore;
@@ -32,10 +40,23 @@ public class UIController : MonoBehaviour {
     }
     public void ShowWinScreen()
     {
-
+        InGameCanvas.SetActive(false);
+        WinScreenCanvas.GetComponent<CanvasGroup>().interactable = true;
+        WinScreenCanvas.GetComponent<CanvasGroup>().alpha = 1;
     }
     public void ShowEscapeMenu()
     {
-
+        EscapeMenuCanvas.GetComponent<CanvasGroup>().interactable = true;
+        EscapeMenuCanvas.GetComponent<CanvasGroup>().alpha = 1;
+        inEscapeMenu = true;
+        Time.timeScale = 0;
+    }
+    public void HideEscapeMenu()
+    {
+        inEscapeMenu = false;
+        Time.timeScale = 1;
+        EscapeMenuCanvas.GetComponent<CanvasGroup>().alpha = 0;
+        EscapeMenuCanvas.GetComponent<CanvasGroup>().interactable = false;
+        
     }
 }

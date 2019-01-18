@@ -8,15 +8,35 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private bool inEscapeMenu;
+    private UIController uIController;
+
+    // Use this for initialization
+    void Start () {
+        GameObject UIControllerObject = GameObject.FindWithTag("UIController");
+        if (UIControllerObject != null)
+        {
+            uIController = UIControllerObject.GetComponent<UIController>();
+        }
+        if (uIController == null)
+        {
+            Debug.Log("Cannot find 'UIController' script");
+        }
+        inEscapeMenu = uIController.inEscapeMenu;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        inEscapeMenu = uIController.inEscapeMenu;
+        if (Input.GetKeyDown(KeyCode.Escape) && !inEscapeMenu)
+        {
+            uIController.ShowEscapeMenu();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && inEscapeMenu)
+        {
+            uIController.HideEscapeMenu();
+        }
+    }
 
     public void LoadLevel()
     {
