@@ -63,7 +63,7 @@ public class LevelController : MonoBehaviour {
             Debug.Log("Lose");
             uIController.ShowGameOverScreen();
         }
-        else if(levelScore == scoreGoal)
+        else if(levelScore >= scoreGoal)
         {
             Debug.Log("Win");
             uIController.ShowWinScreen();
@@ -130,7 +130,7 @@ public class LevelController : MonoBehaviour {
             x += Mathf.FloorToInt(platform.transform.localScale.x/2);
 
             int height = Mathf.FloorToInt(Random.Range(yMin, yMax));
-            if (Mathf.Abs(height - previousHeight) > 2)
+            if (Mathf.Abs(height - previousHeight) > 1)
             {
                 //bring height closer to previous height
                 height = Mathf.FloorToInt((height + previousHeight) / 2);
