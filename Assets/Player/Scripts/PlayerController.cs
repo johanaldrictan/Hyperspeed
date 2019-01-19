@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float fastFallSpeed;
 
+    public float raycastDist;
+
     // Use this for initialization
     void Start()
     {
@@ -27,9 +29,22 @@ public class PlayerController : MonoBehaviour
         wantsToJump = Input.GetButton("Jump");
         animator.SetBool("Walking", isWalking);
         animator.SetBool("Grounded", isTouchingGround);
+        //Vector3 raycastDest = new Vector3(transform.position.x, transform.position.y - raycastDist, 0);
+        //Debug.DrawLine(transform.position, raycastDest, Color.yellow, 1000000);
     }
     void FixedUpdate()
     {
+        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector2.down, raycastDist, 1 << LayerMask.NameToLayer("Ground"));
+       
+        if(rayHit.collider != null)
+        {
+            isTouchingGround = true;
+        }
+        else
+        {
+            isTouchingGround = false;
+        }
+
         //act on input here
         if (isTouchingGround)
         {
@@ -39,6 +54,7 @@ public class PlayerController : MonoBehaviour
                 wantsToJump = false;
             }
         }
+        //is in mid air
         else
         {
             //mid air
@@ -64,15 +80,4 @@ public class PlayerController : MonoBehaviour
             isWalking = false;
         }
     }
-    void OnTriggerEnter2D(Collider2D other) {
-		if (other.tag == "Ground") {
-			isTouchingGround = true;           
-		}
-	}
-
-	void OnTriggerExit2D(Collider2D other) {
-		if (other.tag == "Ground") {
-			isTouchingGround = false;
-		}
-	}
 }

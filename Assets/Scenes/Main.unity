@@ -603,6 +603,15 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 958ed8cdf56d789438aeb8c7cc587fc7, type: 2}
+    - target: {fileID: 4918384626421078, guid: 766be1e1e75a07848991ce71eebc22ee, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 50019056621026066, guid: 766be1e1e75a07848991ce71eebc22ee,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 766be1e1e75a07848991ce71eebc22ee, type: 2}
   m_IsPrefabAsset: 0
@@ -1489,9 +1498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0323ef1e7f67868468d90d233b3a5ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1043507176438118, guid: 2fa4c5203d97e294586036226d65f7d6,
+  playerPrefab: {fileID: 1476796273857526, guid: 2fa4c5203d97e294586036226d65f7d6,
     type: 2}
-  minPlatformSpeed: 5
+  minPlatformSpeed: 3
   maxPlatformSpeed: 10
   scoreInterval: 1
   scoreGoal: 150
@@ -1499,7 +1508,10 @@ MonoBehaviour:
   platformSpeed: 0
   grid: {fileID: 1408783252}
   platforms:
-  - {fileID: 1067685120741664, guid: 766be1e1e75a07848991ce71eebc22ee, type: 2}
+  - {fileID: 1728728597054796, guid: 9dcb297e23e47bb4aba8fc2c57113a9b, type: 2}
+  - {fileID: 1314104541228490, guid: 5223c87648ff439408ee47a613959967, type: 2}
+  - {fileID: 1434148322981368, guid: aaaf1798b16eb1f458a9e0cffe66570e, type: 2}
+  - {fileID: 1685936205023132, guid: a606ce0b6ac527541869ad10b2d51e30, type: 2}
   distantStars: {fileID: 421184798}
   stars: {fileID: 918765034}
 --- !u!4 &697781953

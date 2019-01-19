@@ -17,6 +17,9 @@ public class UIController : MonoBehaviour {
     private void Start()
     {
         inEscapeMenu = false;
+        GameOverCanvas.SetActive(false);
+        WinScreenCanvas.SetActive(false);
+        EscapeMenuCanvas.SetActive(false);
         GameOverCanvas.GetComponent<CanvasGroup>().interactable = false;
         WinScreenCanvas.GetComponent<CanvasGroup>().interactable = false;
         EscapeMenuCanvas.GetComponent<CanvasGroup>().interactable = false;
@@ -35,17 +38,20 @@ public class UIController : MonoBehaviour {
     public void ShowGameOverScreen()
     {
         InGameCanvas.SetActive(false);
+        GameOverCanvas.SetActive(true);
         GameOverCanvas.GetComponent<CanvasGroup>().interactable = true;
         GameOverCanvas.GetComponent<CanvasGroup>().alpha = 1;
     }
     public void ShowWinScreen()
     {
         InGameCanvas.SetActive(false);
+        WinScreenCanvas.SetActive(true);
         WinScreenCanvas.GetComponent<CanvasGroup>().interactable = true;
         WinScreenCanvas.GetComponent<CanvasGroup>().alpha = 1;
     }
     public void ShowEscapeMenu()
     {
+        EscapeMenuCanvas.SetActive(true);
         EscapeMenuCanvas.GetComponent<CanvasGroup>().interactable = true;
         EscapeMenuCanvas.GetComponent<CanvasGroup>().alpha = 1;
         inEscapeMenu = true;
@@ -57,6 +63,6 @@ public class UIController : MonoBehaviour {
         Time.timeScale = 1;
         EscapeMenuCanvas.GetComponent<CanvasGroup>().alpha = 0;
         EscapeMenuCanvas.GetComponent<CanvasGroup>().interactable = false;
-        
+        EscapeMenuCanvas.SetActive(false);
     }
 }

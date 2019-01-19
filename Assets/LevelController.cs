@@ -16,12 +16,15 @@ public class LevelController : MonoBehaviour {
     public int scoreGoal;
 
     public float scoreThreshold;
+    public int coinValue;
+
 
     public float platformSpeed;
 
     //Level generation
     public Grid grid;
     public GameObject[] platforms;
+    public GameObject coin;
 
     public ParticleSystem distantStars;
     public ParticleSystem stars;
@@ -30,10 +33,12 @@ public class LevelController : MonoBehaviour {
     private float timer;
     private UIController uIController;
     private bool updateParticleSpeed;
+    private int previousHeight;
     
 
 	// Use this for initialization
 	void Start () {
+        previousHeight = -1;
         GameObject UIControllerObject = GameObject.FindWithTag("UIController");
         if (UIControllerObject != null)
         {
@@ -107,20 +112,45 @@ public class LevelController : MonoBehaviour {
     void SpawnTilemap()
     {
         //todo: Implement proper random tilemap generation
-        //Pick random platform 
-        //determine spacing by looking at the transfom.localscale.x
-        //determine additional spacing by random function with a clamp
-        //determine height by perlin noise 
-        //loop
+        //Grid dimensions
+        int xMin = 10;
+        int xMax = 27;
+        int yMin = -5;
+        int yMax = 3;
 
-        //smooth heights
+        int maxPlatformDist = 2;
 
+
+        for (int x = xMin; x <= xMax;)
+        {           
+            //Pick random platform
+            GameObject platform = platforms[Random.Range(0, platforms.Length)];
+
+            //move to platform center
+            x += Mathf.FloorToInt(platform.transform.localScale.x/2);
+
+            int height = Mathf.FloorToInt(Random.Range(yMin, yMax));
+            if (Mathf.Abs(height - previousHeight) > 2)
+            {
+                //bring height closer to previous height
+                height = Mathf.FloorToInt((height + previousHeight) / 2);
+            }
+            previousHeight = height;
+
+            Instantiate(platform, grid.CellToWorld(new Vector3Int(x, height, 0)), Quaternion.identity);
+
+            //spawn coins above platform
+
+            //spawn obstacles on platform
+            //TODO in future version
+
+            x += Mathf.FloorToInt(Random.Range(platform.transform.localScale.x/2, platform.transform.localScale.x/2 + maxPlatformDist));
+        }
+        
         //spawn obstacles
+        //TODO in future version
 
-        //spawn coins
 
-
-        Instantiate(platforms[0], grid.CellToWorld(new Vector3Int(18, -1, 0)), Quaternion.identity);
     }
 
     void ChangeSpeed()
