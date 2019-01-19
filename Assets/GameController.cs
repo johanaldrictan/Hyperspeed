@@ -27,20 +27,24 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        inEscapeMenu = uIController.inEscapeMenu;
-        if (Input.GetKeyDown(KeyCode.Escape) && !inEscapeMenu)
+        if (uIController != null)
         {
-            uIController.ShowEscapeMenu();
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape) && inEscapeMenu)
-        {
-            uIController.HideEscapeMenu();
+            inEscapeMenu = uIController.inEscapeMenu;
+            if (Input.GetKeyDown(KeyCode.Escape) && !inEscapeMenu)
+            {
+                uIController.ShowEscapeMenu();
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && inEscapeMenu)
+            {
+                uIController.HideEscapeMenu();
+            }
         }
     }
 
     public void LoadLevel()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
     public void QuitGame()
     {

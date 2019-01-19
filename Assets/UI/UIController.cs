@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour {
 
@@ -12,17 +13,28 @@ public class UIController : MonoBehaviour {
     public GameObject WinScreenCanvas;
     public GameObject EscapeMenuCanvas;
 
+    public GameObject HowToCanvas;
+    public GameObject MainMenuCanvas;
+
     public bool inEscapeMenu;
 
     private void Start()
     {
-        inEscapeMenu = false;
-        GameOverCanvas.SetActive(false);
-        WinScreenCanvas.SetActive(false);
-        EscapeMenuCanvas.SetActive(false);
-        GameOverCanvas.GetComponent<CanvasGroup>().interactable = false;
-        WinScreenCanvas.GetComponent<CanvasGroup>().interactable = false;
-        EscapeMenuCanvas.GetComponent<CanvasGroup>().interactable = false;
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            inEscapeMenu = false;
+            GameOverCanvas.SetActive(false);
+            WinScreenCanvas.SetActive(false);
+            EscapeMenuCanvas.SetActive(false);
+            GameOverCanvas.GetComponent<CanvasGroup>().interactable = false;
+            WinScreenCanvas.GetComponent<CanvasGroup>().interactable = false;
+            EscapeMenuCanvas.GetComponent<CanvasGroup>().interactable = false;
+        }
+        else
+        {
+            HowToCanvas.SetActive(false);
+            HowToCanvas.GetComponent<CanvasGroup>().interactable = false;
+        }
 
     }
 
@@ -48,6 +60,20 @@ public class UIController : MonoBehaviour {
         WinScreenCanvas.SetActive(true);
         WinScreenCanvas.GetComponent<CanvasGroup>().interactable = true;
         WinScreenCanvas.GetComponent<CanvasGroup>().alpha = 1;
+    }
+    public void ShowHowTo()
+    {
+        MainMenuCanvas.SetActive(false);
+        HowToCanvas.SetActive(true);
+        HowToCanvas.GetComponent<CanvasGroup>().interactable = true;
+        HowToCanvas.GetComponent<CanvasGroup>().alpha = 1;
+    }
+    public void HideHowTo()
+    {
+        HowToCanvas.GetComponent<CanvasGroup>().alpha = 0;
+        HowToCanvas.GetComponent<CanvasGroup>().interactable = false;
+        HowToCanvas.SetActive(false);
+        MainMenuCanvas.SetActive(true);
     }
     public void ShowEscapeMenu()
     {

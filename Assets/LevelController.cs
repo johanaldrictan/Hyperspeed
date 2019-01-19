@@ -67,6 +67,7 @@ public class LevelController : MonoBehaviour {
         {
             Debug.Log("Win");
             uIController.ShowWinScreen();
+            Time.timeScale = 0;
         }
         else
         {
