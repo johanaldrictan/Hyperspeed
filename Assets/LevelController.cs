@@ -140,6 +140,41 @@ public class LevelController : MonoBehaviour {
             Instantiate(platform, grid.CellToWorld(new Vector3Int(x, height, 0)), Quaternion.identity);
 
             //spawn coins above platform
+            //25% chance to have coins on a platform
+            if(Random.Range(1, 10) < 4)
+            {
+                int numCoins = Random.Range(3, 7);
+                int heightOffset = Random.Range(1, 3);
+                switch (numCoins)
+                {
+                    case 3:
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset, 0)), Quaternion.identity);
+                        break;
+                    case 4:
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset + 1, 0)), Quaternion.identity);
+                        break;
+                    case 5:
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset + 1, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset + 1, 0)), Quaternion.identity);
+                        break;
+                    case 6:
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset + 1, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset + 1, 0)), Quaternion.identity);
+                        Instantiate(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset + 1, 0)), Quaternion.identity);
+                        break;
+                }
+            }
 
             //spawn obstacles on platform
             //TODO in future version
@@ -181,4 +216,9 @@ public class LevelController : MonoBehaviour {
         ChangeSpeed();
     }
 
+    public void AddScore()
+    {
+        levelScore += coinValue;
+        OnScoreChanged();
+    }
 }

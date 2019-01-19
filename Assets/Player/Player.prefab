@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212774361125276140}
   - component: {fileID: 50952425939100126}
   - component: {fileID: 114280899131362698}
-  - component: {fileID: 70509800077599064}
   - component: {fileID: 95759983642083212}
   - component: {fileID: 70159750411698690}
   m_Layer: 0
@@ -80,21 +79,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.59, y: 0.92}
   m_Direction: 0
---- !u!70 &70509800077599064
-CapsuleCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1476796273857526}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 958ed8cdf56d789438aeb8c7cc587fc7, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: -0.46}
-  m_Size: {x: 0.5, y: 0.06}
-  m_Direction: 1
 --- !u!95 &95759983642083212
 Animator:
   serializedVersion: 3
@@ -127,6 +111,7 @@ MonoBehaviour:
   speed: 7
   jumpForce: 7
   fastFallSpeed: 10
+  raycastDist: 1
 --- !u!212 &212774361125276140
 SpriteRenderer:
   m_ObjectHideFlags: 1

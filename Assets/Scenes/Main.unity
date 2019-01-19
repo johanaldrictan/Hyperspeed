@@ -612,6 +612,10 @@ Prefab:
       propertyPath: m_BodyType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1067685120741664, guid: 766be1e1e75a07848991ce71eebc22ee, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 766be1e1e75a07848991ce71eebc22ee, type: 2}
   m_IsPrefabAsset: 0
@@ -1505,6 +1509,7 @@ MonoBehaviour:
   scoreInterval: 1
   scoreGoal: 150
   scoreThreshold: 100
+  coinValue: 5
   platformSpeed: 0
   grid: {fileID: 1408783252}
   platforms:
@@ -1512,6 +1517,7 @@ MonoBehaviour:
   - {fileID: 1314104541228490, guid: 5223c87648ff439408ee47a613959967, type: 2}
   - {fileID: 1434148322981368, guid: aaaf1798b16eb1f458a9e0cffe66570e, type: 2}
   - {fileID: 1685936205023132, guid: a606ce0b6ac527541869ad10b2d51e30, type: 2}
+  coin: {fileID: 1894839231541478, guid: cf67f55ad7aa7fe4fa71c4d78c320f4c, type: 2}
   distantStars: {fileID: 421184798}
   stars: {fileID: 918765034}
 --- !u!4 &697781953

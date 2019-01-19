@@ -16,11 +16,22 @@ public class PlayerController : MonoBehaviour
 
     public float raycastDist;
 
+    private LevelController levelController;
+
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        GameObject levelControllerObject = GameObject.FindWithTag("LevelController");
+        if (levelControllerObject != null)
+        {
+            levelController = levelControllerObject.GetComponent<LevelController>();
+        }
+        if (levelController == null)
+        {
+            Debug.Log("Cannot find 'LevelController' script");
+        }
     }
     // Update is called once per frame
     void Update()
@@ -29,8 +40,8 @@ public class PlayerController : MonoBehaviour
         wantsToJump = Input.GetButton("Jump");
         animator.SetBool("Walking", isWalking);
         animator.SetBool("Grounded", isTouchingGround);
-        //Vector3 raycastDest = new Vector3(transform.position.x, transform.position.y - raycastDist, 0);
-        //Debug.DrawLine(transform.position, raycastDest, Color.yellow, 1000000);
+        Vector3 raycastDest = new Vector3(transform.position.x, transform.position.y - raycastDist, 0);
+        Debug.DrawLine(transform.position, raycastDest, Color.yellow, 10);
     }
     void FixedUpdate()
     {
@@ -78,6 +89,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             isWalking = false;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Coin"))
+        {
+            levelController.AddScore();
+            Destroy(collision.gameObject);
         }
     }
 }
