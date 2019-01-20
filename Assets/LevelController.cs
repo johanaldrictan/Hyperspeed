@@ -34,10 +34,11 @@ public class LevelController : MonoBehaviour {
     private UIController uIController;
     private bool updateParticleSpeed;
     private int previousHeight;
-    
 
-	// Use this for initialization
-	void Start () {
+    private bool inEscapeMenu;
+
+    // Use this for initialization
+    void Start () {
         previousHeight = -1;
         Time.timeScale = 1;
         GameObject UIControllerObject = GameObject.FindWithTag("UIController");
@@ -55,10 +56,22 @@ public class LevelController : MonoBehaviour {
         SpawnTilemap();
         StartCoroutine(SpawnTilemapWithInterval());
         SpawnPlayer();
-	}
+        inEscapeMenu = uIController.inEscapeMenu;
+    }
 	
 	void Update () {
-        
+        if (uIController != null)
+        {
+            inEscapeMenu = uIController.inEscapeMenu;
+            if (Input.GetKeyDown(KeyCode.Escape) && !inEscapeMenu && !gameOver && !(levelScore >= scoreGoal))
+            {
+                uIController.ShowEscapeMenu();
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && inEscapeMenu)
+            {
+                uIController.HideEscapeMenu();
+            }
+        }
         if (gameOver)
         {
             Debug.Log("Lose");
