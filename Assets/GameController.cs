@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour {
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         Time.timeScale = 1;
     }
     public void QuitGame()

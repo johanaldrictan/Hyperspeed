@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour {
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             inEscapeMenu = false;
             GameOverCanvas.SetActive(false);
