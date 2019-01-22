@@ -550,7 +550,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4918384626421078, guid: 766be1e1e75a07848991ce71eebc22ee, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 50019056621026066, guid: 766be1e1e75a07848991ce71eebc22ee,
         type: 2}
@@ -1594,6 +1594,11 @@ MonoBehaviour:
   - {fileID: 1314104541228490, guid: 5223c87648ff439408ee47a613959967, type: 2}
   - {fileID: 1434148322981368, guid: aaaf1798b16eb1f458a9e0cffe66570e, type: 2}
   - {fileID: 1685936205023132, guid: a606ce0b6ac527541869ad10b2d51e30, type: 2}
+  obstacles:
+  - {fileID: 1521656842990980, guid: 0f6f364f7f27a3b498e74f3d6ee4bbaf, type: 2}
+  - {fileID: 1958761603484922, guid: ced76f5860305cc40acc9495125653a9, type: 2}
+  - {fileID: 1323153131622638, guid: 36314dc634c5cd74687653ea7840fcc5, type: 2}
+  - {fileID: 1309204556941782, guid: 97ab12de2d2285c49814735d27b36c60, type: 2}
   coin: {fileID: 1894839231541478, guid: cf67f55ad7aa7fe4fa71c4d78c320f4c, type: 2}
   distantStars: {fileID: 421184798}
   stars: {fileID: 918765034}
@@ -2871,7 +2876,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9930946b7c5f48e44aef1e56c2de7315, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9930946b7c5f48e44aef1e56c2de7315, type: 2}
       propertyPath: m_LocalRotation.y
@@ -2943,7 +2948,7 @@ Transform:
   m_Children:
   - {fileID: 860209537}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1473647825
 Prefab:
@@ -3261,5 +3266,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

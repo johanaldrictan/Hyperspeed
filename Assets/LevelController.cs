@@ -24,6 +24,7 @@ public class LevelController : MonoBehaviour {
     //Level generation
     public Grid grid;
     public GameObject[] platforms;
+    public GameObject[] obstacles;
     public GameObject coin;
 
     public ParticleSystem distantStars;
@@ -154,47 +155,50 @@ public class LevelController : MonoBehaviour {
 
             Instantiate(platform, grid.CellToWorld(new Vector3Int(x, height, 0)), Quaternion.identity);
 
+            //spawn obstacles
+            if(Random.Range(1, 10) < 5)
+            {
+                Instantiate(obstacles[Random.Range(0, obstacles.Length - 1)].gameObject, grid.CellToWorld(new Vector3Int(x + Random.Range(0, 2), height + 1, 0)), Quaternion.identity);
+            }
+
             //spawn coins above platform
             //25% chance to have coins on a platform
             if(Random.Range(1, 10) < 4)
             {
                 int numCoins = Random.Range(3, 7);
                 int heightOffset = Random.Range(1, 3);
+                int xOffset = Random.Range(0, 2);
                 switch (numCoins)
                 {
                     case 3:
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1 + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1 + xOffset, height + heightOffset, 0)));
                         break;
                     case 4:
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset + 1, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1 + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1 + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + xOffset, height + heightOffset + 1, 0)));
                         break;
                     case 5:
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset + 1, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset + 1, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1 + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1 + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + xOffset, height + heightOffset + 1, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1 + xOffset, height + heightOffset + 1, 0)));
 
                         break;
                     case 6:
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x, height + heightOffset + 1, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1, height + heightOffset + 1, 0)));
-                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1, height + heightOffset + 1, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1 + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1 + xOffset, height + heightOffset, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + xOffset, height + heightOffset + 1, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x + 1 + xOffset, height + heightOffset + 1, 0)));
+                        SpawnCoin(coin, grid.CellToWorld(new Vector3Int(x - 1 + xOffset, height + heightOffset + 1, 0)));
                         break;
                 }
             }
-
-            //spawn obstacles on platform
-            //TODO in future version
-
             x += Mathf.FloorToInt(Random.Range(platform.transform.localScale.x/2, platform.transform.localScale.x/2 + maxPlatformDist));
         }
 
@@ -202,7 +206,7 @@ public class LevelController : MonoBehaviour {
 
     void SpawnCoin(GameObject gameObject, Vector3 location)
     {
-        if (Physics2D.Raycast(location, Vector2.down, 0.1f).collider != null)
+        if (Physics2D.Raycast(location, Vector2.down, 0.2f).collider != null)
         {
             Instantiate(coin, location, Quaternion.identity);
         }
