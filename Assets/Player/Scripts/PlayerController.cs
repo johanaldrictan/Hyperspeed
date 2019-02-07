@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Cannot find 'LevelController' script");
         }
+        //levelController = LevelController.instance;
     }
     // Update is called once per frame
     void Update()
@@ -75,6 +76,13 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, -fastFallSpeed);
             }
         }
+
+        //float movementModifier = Input.GetAxis("Horizontal");
+        //if (movementModifier != 0)
+        //{
+        //    this.GetComponent<SpriteRenderer>().flipX = movementModifier > 0 ? false : true;
+        //    isWalking = true;
+        //}
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
         if (Input.GetAxisRaw("Horizontal") > 0f)
         {
@@ -93,7 +101,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Coin"))
+        if (collision.CompareTag("Coin"))
         {
             levelController.AddScore();
             Destroy(collision.gameObject);

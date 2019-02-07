@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class LevelController : MonoBehaviour {
 
+    public static LevelController instance;
+
     private bool gameOver = false;
 
     public GameObject playerPrefab;
@@ -37,6 +39,11 @@ public class LevelController : MonoBehaviour {
     private int previousHeight;
 
     private bool inEscapeMenu;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start () {
