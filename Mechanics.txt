@@ -1,0 +1,11 @@
+1. Player can move left to right using Physics based movement(Rigidbody2D)
+2. Player can jump using Physics based movement(Rigidbody2D)... player can also choose to
+   fall faster
+3. Player collides with platforms and obstacles
+4. When player goes out of screen, player triggers loss state. 
+   When player collides with coin, player collects coin and coin is destroyed
+5. Platforms, Coins, and Obstacles are randomly generated as the game progresses
+
+Extra Credit: The goal of the game is to survive and collect coins until you reach the 
+score threshold. The level will scroll to the left and move faster the closer you reach
+the score threshold.
